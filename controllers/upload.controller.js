@@ -10,7 +10,6 @@ const searchByFieldHandler = (req, res) => {
     try {
         const searchResults = searchByField(query, sortBy);
         const html = ejs.render(csvViewTemplate, { data: searchResults });
-        console.log(searchResults);
         res.send(html);
     } catch (error) {
         res.status(400).json({ error: error.message });
@@ -33,11 +32,6 @@ const uploadFile = (req, res) => {
            processExcelFile(fileData, res);
         }else if ( extension === 'docx' || extension === 'msword' || extension === 'vnd.openxmlformats-officedocument.wordprocessingml.document') {
             processDocFile(fileData, res);
-    } else if (extension === 'pdf') {
-            const PDFDocument = require('pdfkit');
-            const doc = new PDFDocument();
-            res.contentType('application/pdf');
-            doc.pipe(res);
         } else {
             req.flash('error', 'Invalid file format');
             res.locals.error = req.flash('error');

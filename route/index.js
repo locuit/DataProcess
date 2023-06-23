@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const uploadRouter = require('./uploadRoutes');
-const dataRouter = require('./dataRoutes');
 
 const defaultRoutes = [
     {
