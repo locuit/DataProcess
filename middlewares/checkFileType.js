@@ -1,6 +1,8 @@
 const checkFileType = (req, res, next) => {
     if (!req.files || !req.files.file) {
         req.flash('error', 'No file uploaded');
+        res.locals.error = req.flash('error');
+        res.render('upload.ejs');
         return next(new Error('No file uploaded'));
     }
     const file = req.files.file;
