@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File Upload</title>
+</head>
+<body>
+<h1>File Upload</h1>
+<% if (locals.error && locals.error.length > 0) { %>
+    <div class="error-message">
+        <%= locals.error[0] %>
+    </div>
+<% } %>
+
+<form action="/upload" method="POST" enctype="multipart/form-data">
+    <input type="file" name="file">
+    <button type="submit">Upload</button>
+</form>
+</body>
+</html>

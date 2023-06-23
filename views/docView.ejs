@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Word File View</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+<h1>Word File View</h1>
+<h2>Tables</h2>
+<% if (tables && tables.length > 0) { %>
+    <% for (let i = 0; i < tables.length; i++) { %>
+        <table>
+            <thead>
+            <tr>
+                <% if (tables[i][0]) { %>
+                    <% const headers = Object.keys(tables[i][0]); %>
+                    <% for (let j = 0; j < headers.length; j++) { %>
+                        <th><%= headers[j] %></th>
+                    <% } %>
+                <% } %>
+            </tr>
+            </thead>
+            <tbody>
+            <% for (let j = 0; j < tables[i].length; j++) { %>
+                <tr>
+                    <% const row = tables[i][j]; %>
+                    <% const values = Object.values(row); %>
+                    <% for (let k = 0; k < values.length; k++) { %>
+                        <td><%= values[k] %></td>
+                    <% } %>
+                </tr>
+            <% } %>
+            </tbody>
+        </table>
+    <% } %>
+<% } %>
+<h2>Paragraphs</h2>
+<form action="/upload/search-doc" method="GET">
+    <input type="text" id="query" name="query" placeholder="Search">
+    <button type="submit">Search</button>
+</form>
+<% if (paragraphs && paragraphs.length > 0) { %>
+    <% for (let i = 0; i < paragraphs.length; i++) { %>
+        <p><%= paragraphs[i] %></p>
+    <% } %>
+<% } %>
+
+</body>
+</html>

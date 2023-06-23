@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+<form method="get" action="/upload/search">
+    <label for="query">Type a query:</label>
+    <input type="text" id="query" name="query" placeholder="field =/>=/<= value">
+    <br>
+    <label for="sortBy">Sort:</label>
+    <select id="sortBy" name="sortBy">
+        <% if (data && data.length > 0) {
+        Object.keys(data[0]).forEach(function(key) { %>
+            <option value="<%= key %>:desc"><%= key %> (Desc)</option>
+            <option value="<%= key %>:asc"><%= key %> (Asc)</option>
+        <% });
+        } %>
+    </select>
+    <br>
+    <button type="submit">Search</button>
+</form>
+<table>
+    <thead>
+    <tr>
+        <% if (data && data.length > 0) {
+        Object.keys(data[0]).forEach(function(key) { %>
+            <th>
+                <%= key %>
+            </th>
+        <% });
+        } %>
+    </tr>
+    </thead>
+    <tbody>
+    <% if (data && data.length > 0) {
+    data.forEach(function(row) { %>
+        <tr>
+            <% Object.values(row).forEach(function(value) { %>
+                <td><%= value %></td>
+            <% }); %>
+        </tr>
+    <% });
+    } %>
+    </tbody>
+</table>
+</body>
+</html>
