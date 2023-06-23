@@ -98,6 +98,10 @@ const searchByField = (query, sortBy) => {
                             return numericFieldValue >= numericValue;
                         case '<=':
                             return numericFieldValue <= numericValue;
+                        case '>':
+                            return numericFieldValue > numericValue;
+                        case '<':
+                            return numericFieldValue < numericValue;
                         default:
                             return false;
                     }
